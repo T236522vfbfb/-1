@@ -1,15 +1,34 @@
-import healthCheck from '../healthCheck';
+import showHealth from '../health';
 
-jest.mock('../http');
-
-beforeEach(() => {
-  jest.resetAllMocks();
+test('should healthy', () => {
+  const received = showHealth({ name: 'Маг', health: 90 });
+  expect(received).toBe('healthy');
 });
 
-test('should call loadUser once', () => {
-  httpGet.mockReturnValue(JSON.stringify({}));
+test('should wounded', () => {
+  const received = showHealth({ name: 'Маг', health: 40 });
+  expect(received).toBe('wounded');
+});
 
-  const response = loadUser(1);
-  expect(response).toEqual({});
-  expect(httpGet).toHaveBeenCalledWith('http://server:8080/users/1');
+test('should critical', () => {
+  const received = showHealth({ name: 'Маг', health: 10 });
+  expect(received).toBe('critical');
+});
+
+test('Parameter is not a number!', () => {
+  expect(() => {
+    showHealth({});
+  }).toThrow();
+});
+
+test('Parameter is not a number!', () => {
+  expect(() => {
+    showHealth({ name: 'Маг', health: 'mistake' });
+  }).toThrow();
+});
+
+test('Parameter is not a number!', () => {
+  expect(() => {
+    showHealth({ name: 'Маг', health: -10 });
+  }).toThrow();
 });
