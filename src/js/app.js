@@ -1,5 +1,14 @@
 import showHealth from './health';
 
-console.log('worked');
+function sortCharacters(array) {
+    return array.sort((a, b) => b.health - a.health)
+}
 
-showHealth(70);
+const characters = [
+    {name: 'мечник', health: 10},
+    {name: 'маг', health: 100},
+    {name: 'лучник', health: 80},
+]
+
+console.log(sortCharacters(characters))
+console.log(showHealth(70))
