@@ -1,8 +1,5 @@
-import showHealth from './health';
-
-function sortCharacters(array) {
-    return array.sort((a, b) => b.health - a.health)
-}
+import showHealth from './healthCheck';
+import sortCharacters from './sortCharacters';
 
 const characters = [
     {name: 'мечник', health: 10},
